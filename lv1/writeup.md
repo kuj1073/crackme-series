@@ -104,7 +104,8 @@ pwndbg> r
 Input: test
 ```
 
-처음에는 `b strcmp`로 중단점을 걸었는데, 프로그램이 시작될 때 동적 로더(`ld-linux`)가 내부적으로 strcmp를 여러 번 호출해서 `Input:`이 나오기 전에 계속 멈췄다. `strcmp@plt`는 lv1 안에서 libc의 strcmp를 부르는 호출 창구(PLT)라서, main의 strcmp 호출에서만 멈춘다.
+> **참고: `b strcmp`가 아니라 `b strcmp@plt`를 쓰는 이유**
+> `b strcmp`로 걸면 프로그램이 시작될 때 동적 로더(`ld-linux`)가 내부적으로 호출하는 strcmp에서도 멈춰서, `Input:`이 나오기 전에 계속 멈춘다. `strcmp@plt`는 lv1 안에서 libc의 strcmp를 부르는 호출 창구(PLT)라서, main의 strcmp 호출에서만 멈춘다.
 
 ### 2) 인자 확인
 
